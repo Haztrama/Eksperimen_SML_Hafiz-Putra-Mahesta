@@ -1,0 +1,31 @@
+name: Data Preprocessing Automation
+
+on:
+  push:
+    paths:
+      - 'bank_churn_raw/**'  
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas scikit-learn
+
+      - name: Run Automate Preprocessing
+        run: |
+          python preprocessing/automate_Hafiz-Putra-Mahesta.py
+        
+      - name: Verify Output
+        run: |
+          ls preprocessing/bank_churn_preprocessing/
+          echo "Preprocessing Berhasil!"
